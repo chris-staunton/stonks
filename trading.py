@@ -25,20 +25,32 @@ data_json = res.json()
 
 test = data_json['Time Series (5min)']
 # print(test)
+# str = ''
+# for i in test:
+#     str += i
+#     print(str)
+#     print(test[str])
 
-for i in test:
-    str = i
-    print(str)
-    print(test[str])
+# print(test[0])
 
 # print(test['2021-01-27 09:35:00'])
 df = pd.DataFrame(test).transpose()
 df.columns=['open','high','low','close','volume']
+#df.index_col('date')
 print(df.head())
-
-print(df['close'])
+#df.plot()
+# print(df['close'])
 # df['close'].plot()
-
+df.index.name = 'date'
+print(df.index)
 #print(req.json())
 
 #print(data.head())
+df = df.drop('volume', 1)
+print(df.head())
+df=df.astype(float)
+# plt.figure()
+df.plot()
+plt.show()
+
+print(df.plot())
